@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商品管理アプリ</title>
+    <title>商品管理-APP</title>
     <link rel="stylesheet" href="css/style.css">
 
     <!-- google fontsの読込 -->
