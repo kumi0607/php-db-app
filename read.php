@@ -42,6 +42,7 @@ try {
     $stmt_select->execute();    
 
     //  sql文の実行結果を配列で取得する
+    // PDO::FETCH_ASSOC＝カラム名のみをキーとする配列を取得する
      $products = $stmt_select->fetchAll(PDO::FETCH_ASSOC);
 
     } catch (PDOException $e) {
@@ -74,6 +75,12 @@ try {
     <main>
         <article class="products">
             <h1>商品一覧</h1>
+            <?php
+            // (商品登録・編集・削除後)messageパラメータの値を受け取っていれば表示する
+            if (isset($_GET['message'])) {
+                echo "<p class='success'>{$_GET['message']}</p>";
+            }
+            ?>
             <div class="products-ui">
                 <div>
                     <a href="read.php?order=desc&keyword=<?= $keyword ?>">
@@ -88,7 +95,7 @@ try {
                     </form>
                 </div>
                 <!-- "＃"トップへーじへ遷移 -->
-                <a href="#" class="btn">商品登録</a>
+                <a href="create.php" class="btn">商品登録</a>
             </div>
             <table class="products-table">
                 <tr>
@@ -97,6 +104,8 @@ try {
                     <th>単価</th>
                     <th>在庫数</th>
                     <th>仕入先コード</th>
+                    <th>編集</th>
+                    <th>削除</th>
                 </tr>
                 
                 <?php
@@ -110,6 +119,8 @@ try {
                     <td>{$product['price']}</td>
                     <td>{$product['stock_quantity']}</td>
                     <td>{$product['vendor_code']}</td>
+                    <td><a href='update.php?id={$product['id']}'><img src='images/edit.png' alt='編集' class='edit-icon'></a></td>
+                    <td><a href='delete.php?id={$product['id']}'><img src='images/delete.png' alt='削除' class='delete-icon'></a></td>
                     </tr>
                 "; 
                 // 出力する文字列が長いため、一度$table_rowに代入している
